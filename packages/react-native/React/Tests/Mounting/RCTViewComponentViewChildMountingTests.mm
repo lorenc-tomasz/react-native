@@ -150,6 +150,120 @@ using namespace facebook::react;
     [parent unmountChildComponentView:child index:0];
   }
   XCTAssertNil(weakChild);
+  // Keep the parent alive so its deallocation cannot hide a retained child.
+  XCTAssertEqual(parent.subviews.count, 0u);
+}
+
+- (void)testUnmountReleasesClippedChild
+{
+  RCTViewComponentView *parent = [[RCTViewComponentView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+  __weak RCTViewComponentView *weakChild;
+  @autoreleasepool {
+    RCTViewComponentView *child = [[RCTViewComponentView alloc] initWithFrame:CGRectMake(0, 200, 50, 50)];
+    weakChild = child;
+    [parent mountChildComponentView:child index:0];
+
+    auto props = std::make_shared<ViewProps>();
+    props->removeClippedSubviews = true;
+    [parent updateProps:props oldProps:parent.props];
+    [parent updateClippedSubviewsWithClipRect:parent.bounds relativeToView:parent];
+    XCTAssertNil(child.superview);
+  }
+
+  @autoreleasepool {
+    // Clipping keeps the logical child alive until Fabric unmounts it.
+    XCTAssertNotNil(weakChild);
+    [parent unmountChildComponentView:weakChild index:0];
+  }
+  XCTAssertNil(weakChild);
+  XCTAssertEqual(parent.subviews.count, 0u);
+}
+
+- (void)testUnmountReleasesChildrenAfterRepeatedClippingToggles
+{
+  RCTViewComponentView *parent = [[RCTViewComponentView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+  auto clippingProps = std::make_shared<ViewProps>();
+  clippingProps->removeClippedSubviews = true;
+  auto defaultProps = std::make_shared<ViewProps>();
+
+  for (NSInteger iteration = 0; iteration < 3; iteration++) {
+    __weak RCTViewComponentView *weakChild;
+    @autoreleasepool {
+      RCTViewComponentView *child = [[RCTViewComponentView alloc] initWithFrame:CGRectMake(0, 200, 50, 50)];
+      weakChild = child;
+      [parent mountChildComponentView:child index:0];
+      [parent updateProps:clippingProps oldProps:parent.props];
+      [parent updateClippedSubviewsWithClipRect:parent.bounds relativeToView:parent];
+      XCTAssertNil(child.superview);
+    }
+
+    @autoreleasepool {
+      XCTAssertNotNil(weakChild);
+      [parent updateProps:defaultProps oldProps:parent.props];
+      XCTAssertEqual(weakChild.superview, parent);
+      [parent unmountChildComponentView:weakChild index:0];
+    }
+    XCTAssertNil(weakChild, @"Child retained after clipping toggle %ld", (long)iteration);
+    XCTAssertEqual(parent.subviews.count, 0u);
+  }
+}
+
+- (void)testClippingDoesNotRetainRemovedNativeSubview
+{
+  RCTViewComponentView *parent = [RCTViewComponentView new];
+  RCTViewComponentView *child = [RCTViewComponentView new];
+  [parent mountChildComponentView:child index:0];
+
+  __weak UIView *weakEffect;
+  @autoreleasepool {
+    UIView *effect = [UIView new];
+    weakEffect = effect;
+    [parent insertSubview:effect atIndex:0];
+
+    auto props = std::make_shared<ViewProps>();
+    props->removeClippedSubviews = true;
+    [parent updateProps:props oldProps:parent.props];
+    [effect removeFromSuperview];
+  }
+
+  XCTAssertNil(weakEffect);
+  [parent updateProps:std::make_shared<ViewProps>() oldProps:parent.props];
+  XCTAssertEqualObjects(parent.subviews, (@[ child ]));
+}
+
+- (void)testPrepareForRecycleReleasesClippedChildren
+{
+  RCTViewComponentView *parent = [[RCTViewComponentView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+  __weak RCTViewComponentView *weakChild;
+  @autoreleasepool {
+    RCTViewComponentView *child = [[RCTViewComponentView alloc] initWithFrame:CGRectMake(0, 200, 50, 50)];
+    weakChild = child;
+    [parent mountChildComponentView:child index:0];
+
+    auto props = std::make_shared<ViewProps>();
+    props->removeClippedSubviews = true;
+    [parent updateProps:props oldProps:parent.props];
+    [parent updateClippedSubviewsWithClipRect:parent.bounds relativeToView:parent];
+    XCTAssertNil(child.superview);
+  }
+
+  @autoreleasepool {
+    XCTAssertNotNil(weakChild);
+    [parent prepareForRecycle];
+  }
+  XCTAssertNil(weakChild);
+
+  // Reusing the parent must not retain children from its previous lifecycle.
+  __weak RCTViewComponentView *weakNewChild;
+  @autoreleasepool {
+    RCTViewComponentView *child = [RCTViewComponentView new];
+    weakNewChild = child;
+    [parent mountChildComponentView:child index:0];
+    XCTAssertEqualObjects(parent.subviews, (@[ child ]));
+    [parent unmountChildComponentView:child index:0];
+  }
+  XCTAssertNil(weakNewChild);
+  XCTAssertEqual(parent.subviews.count, 0u);
 }
 
 @end
