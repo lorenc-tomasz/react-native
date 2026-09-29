@@ -104,6 +104,7 @@ Pod::Spec.new do |s|
         "\"$(PODS_TARGET_SRCROOT)/react/renderer/components/text/platform/cxx\"",
         "\"$(PODS_TARGET_SRCROOT)/react/renderer/components/textinput/platform/ios\"",
         "\"$(PODS_TARGET_SRCROOT)/react/renderer/components/view/platform/cxx\"",
+        "\"$(PODS_TARGET_SRCROOT)/react/renderer/components/view\"",
         "\"$(PODS_TARGET_SRCROOT)/react/renderer/core\"",
         "\"$(PODS_TARGET_SRCROOT)/react/renderer/debug\"",
       ]
@@ -141,6 +142,8 @@ Pod::Spec.new do |s|
 
   s.subspec "components" do |ss|
     ss.subspec "root" do |sss|
+      sss.dependency             "React-Fabric/coreUmbrella"
+      sss.dependency             "React-Fabric/components/viewUmbrella"
       sss.source_files         = podspec_sources("react/renderer/components/root/**/*.{m,mm,cpp,h}", "react/renderer/components/root/**/*.{h}")
       sss.exclude_files        = "react/renderer/components/root/tests"
       sss.header_dir           = "react/renderer/components/root"
@@ -160,6 +163,8 @@ Pod::Spec.new do |s|
     end
 
     ss.subspec "scrollview" do |sss|
+      sss.dependency             "React-Fabric/coreUmbrella"
+      sss.dependency             "React-Fabric/components/viewUmbrella"
       sss.source_files         = podspec_sources("react/renderer/components/scrollview/**/*.{m,mm,cpp,h}", "react/renderer/components/scrollview/**/*.{h}")
       sss.header_dir           = "react/renderer/components/scrollview"
       sss.exclude_files        = "react/renderer/components/scrollview/tests", "react/renderer/components/scrollview/platform/android"
