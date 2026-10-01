@@ -27,22 +27,29 @@ ${DO_NOT_MODIFY_COMMENT}
 
 #pragma once
 
-#include <react/cxxstableapi/PrivateGuard.h>
+#include <string>
+
+#ifndef RN_EXPORT
+#define RN_EXPORT __attribute__((visibility("default")))
+#endif
 
 namespace facebook::react {
 
-class ReactNativeFeatureFlagsProvider {
+/**
+ * This class provides public access to select internal React Native feature flags.
+ */
+class ReactNativeFeatureFlags_DO_NOT_USE {
  public:
-  virtual ~ReactNativeFeatureFlagsProvider() = default;
-
 ${Object.entries(definitions.common)
+  .filter(([_, flagConfig]) => flagConfig.dangerouslyExposeInPublicCppHeaders)
   .map(
     ([flagName, flagConfig]) =>
-      `  virtual ${getCxxTypeFromDefaultValue(
-        flagConfig.defaultValue,
-      )} ${flagName}() = 0;`,
+      `  /**
+   * ${flagConfig.metadata.description}
+   */
+  RN_EXPORT static ${getCxxTypeFromDefaultValue(flagConfig.defaultValue)} ${flagName}();`,
   )
-  .join('\n')}
+  .join('\n\n')}
 };
 
 } // namespace facebook::react

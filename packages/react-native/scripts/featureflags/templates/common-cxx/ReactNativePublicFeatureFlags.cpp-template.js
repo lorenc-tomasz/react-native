@@ -25,25 +25,22 @@ export default function (definitions: FeatureFlagDefinitions): string {
 
 ${DO_NOT_MODIFY_COMMENT}
 
-#pragma once
-
-#include <react/cxxstableapi/PrivateGuard.h>
+#include "ReactNativeFeatureFlags.h"
+#include "ReactNativePublicFeatureFlags.h"
 
 namespace facebook::react {
 
-class ReactNativeFeatureFlagsProvider {
- public:
-  virtual ~ReactNativeFeatureFlagsProvider() = default;
-
 ${Object.entries(definitions.common)
+  .filter(([_, flagConfig]) => flagConfig.dangerouslyExposeInPublicCppHeaders)
   .map(
     ([flagName, flagConfig]) =>
-      `  virtual ${getCxxTypeFromDefaultValue(
+      `${getCxxTypeFromDefaultValue(
         flagConfig.defaultValue,
-      )} ${flagName}() = 0;`,
+      )} ReactNativeFeatureFlags_DO_NOT_USE::${flagName}() {
+  return ReactNativeFeatureFlags::${flagName}();
+}`,
   )
-  .join('\n')}
-};
+  .join('\n\n')}
 
 } // namespace facebook::react
 `);

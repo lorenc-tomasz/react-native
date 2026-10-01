@@ -72,6 +72,10 @@ Pod::Spec.new do |s|
   end
 
   s.subspec "animationbackend" do |ss|
+    ss.dependency             "React-Fabric/coreUmbrella"
+    ss.dependency             "React-Fabric/components/viewUmbrella"
+    ss.dependency             "React-callinvoker"
+    ss.dependency             "React-timing"
     ss.source_files         = podspec_sources("react/renderer/animationbackend/**/*.{m,mm,cpp,h}", "react/renderer/animationbackend/**/*.{h}")
     ss.header_dir           = "react/renderer/animationbackend"
   end
@@ -107,6 +111,7 @@ Pod::Spec.new do |s|
         "\"$(PODS_TARGET_SRCROOT)/react/renderer/components/view\"",
         "\"$(PODS_TARGET_SRCROOT)/react/renderer/componentregistry\"",
         "\"$(PODS_TARGET_SRCROOT)/react/renderer/core\"",
+        "\"$(PODS_TARGET_SRCROOT)/react/renderer/componentregistry\"",
         "\"$(PODS_TARGET_SRCROOT)/react/renderer/debug\"",
       ]
     end
@@ -209,6 +214,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec "mounting" do |ss|
+    ss.dependency             "React-Fabric/coreUmbrella"
     ss.dependency             "React-jsinspectortracing"
     ss.source_files         = podspec_sources("react/renderer/mounting/**/*.{m,mm,cpp,h}", "react/renderer/mounting/**/*.h")
     ss.exclude_files        = "react/renderer/mounting/tests"
