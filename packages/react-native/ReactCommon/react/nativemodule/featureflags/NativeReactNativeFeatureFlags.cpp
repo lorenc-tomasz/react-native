@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<b273669cee2217f49ad63d88e3439eea>>
+ * @generated SignedSource<<a27136f5ae413f712c906f2e07152443>>
  */
 
 /**
@@ -192,11 +192,6 @@ bool NativeReactNativeFeatureFlags::enableFlexboxAutoMinSizeInStrictMode(
 bool NativeReactNativeFeatureFlags::enableFollowUpMountItemDispatchAndroid(
     jsi::Runtime& /*runtime*/) {
   return ReactNativeFeatureFlags::enableFollowUpMountItemDispatchAndroid();
-}
-
-bool NativeReactNativeFeatureFlags::enableFontScaleChangesUpdatingLayout(
-    jsi::Runtime& /*runtime*/) {
-  return ReactNativeFeatureFlags::enableFontScaleChangesUpdatingLayout();
 }
 
 bool NativeReactNativeFeatureFlags::enableIOSCompressedTextFrameAdjustment(
@@ -387,6 +382,11 @@ bool NativeReactNativeFeatureFlags::fuseboxScreenshotCaptureEnabled(
 bool NativeReactNativeFeatureFlags::fuseboxWebSocketEventsEnabled(
     jsi::Runtime& /*runtime*/) {
   return ReactNativeFeatureFlags::fuseboxWebSocketEventsEnabled();
+}
+
+bool NativeReactNativeFeatureFlags::keepTimersRunningWhileHostPausedAndroid(
+    jsi::Runtime& /*runtime*/) {
+  return ReactNativeFeatureFlags::keepTimersRunningWhileHostPausedAndroid();
 }
 
 bool NativeReactNativeFeatureFlags::optimizedAnimatedPropUpdates(

@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<0a04c5e0a0b418f2efd4b253646ae7c1>>
+ * @generated SignedSource<<a1368426dd823245c54b4312ae7b14e6>>
  */
 
 /**
@@ -83,8 +83,6 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
 
   override fun enableFollowUpMountItemDispatchAndroid(): Boolean = false
 
-  override fun enableFontScaleChangesUpdatingLayout(): Boolean = true
-
   override fun enableIOSCompressedTextFrameAdjustment(): Boolean = false
 
   override fun enableIOSTextBaselineOffsetPerLine(): Boolean = false
@@ -160,6 +158,8 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
   override fun fuseboxScreenshotCaptureEnabled(): Boolean = true
 
   override fun fuseboxWebSocketEventsEnabled(): Boolean = false
+
+  override fun keepTimersRunningWhileHostPausedAndroid(): Boolean = false
 
   override fun optimizedAnimatedPropUpdates(): Boolean = false
 

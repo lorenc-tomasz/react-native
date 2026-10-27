@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<7e430d5b575ea983d53ecde87c4dc9f0>>
+ * @generated SignedSource<<944781e7a547e601f0637869a3a3ec5e>>
  */
 
 /**
@@ -216,12 +216,6 @@ class ReactNativeFeatureFlagsJavaProvider
   bool enableFollowUpMountItemDispatchAndroid() override {
     static const auto method =
         getReactNativeFeatureFlagsProviderJavaClass()->getMethod<jboolean()>("enableFollowUpMountItemDispatchAndroid");
-    return method(javaProvider_);
-  }
-
-  bool enableFontScaleChangesUpdatingLayout() override {
-    static const auto method =
-        getReactNativeFeatureFlagsProviderJavaClass()->getMethod<jboolean()>("enableFontScaleChangesUpdatingLayout");
     return method(javaProvider_);
   }
 
@@ -450,6 +444,12 @@ class ReactNativeFeatureFlagsJavaProvider
   bool fuseboxWebSocketEventsEnabled() override {
     static const auto method =
         getReactNativeFeatureFlagsProviderJavaClass()->getMethod<jboolean()>("fuseboxWebSocketEventsEnabled");
+    return method(javaProvider_);
+  }
+
+  bool keepTimersRunningWhileHostPausedAndroid() override {
+    static const auto method =
+        getReactNativeFeatureFlagsProviderJavaClass()->getMethod<jboolean()>("keepTimersRunningWhileHostPausedAndroid");
     return method(javaProvider_);
   }
 
@@ -775,11 +775,6 @@ bool JReactNativeFeatureFlagsCxxInterop::enableFollowUpMountItemDispatchAndroid(
   return ReactNativeFeatureFlags::enableFollowUpMountItemDispatchAndroid();
 }
 
-bool JReactNativeFeatureFlagsCxxInterop::enableFontScaleChangesUpdatingLayout(
-    facebook::jni::alias_ref<JReactNativeFeatureFlagsCxxInterop> /*unused*/) {
-  return ReactNativeFeatureFlags::enableFontScaleChangesUpdatingLayout();
-}
-
 bool JReactNativeFeatureFlagsCxxInterop::enableIOSCompressedTextFrameAdjustment(
     facebook::jni::alias_ref<JReactNativeFeatureFlagsCxxInterop> /*unused*/) {
   return ReactNativeFeatureFlags::enableIOSCompressedTextFrameAdjustment();
@@ -968,6 +963,11 @@ bool JReactNativeFeatureFlagsCxxInterop::fuseboxScreenshotCaptureEnabled(
 bool JReactNativeFeatureFlagsCxxInterop::fuseboxWebSocketEventsEnabled(
     facebook::jni::alias_ref<JReactNativeFeatureFlagsCxxInterop> /*unused*/) {
   return ReactNativeFeatureFlags::fuseboxWebSocketEventsEnabled();
+}
+
+bool JReactNativeFeatureFlagsCxxInterop::keepTimersRunningWhileHostPausedAndroid(
+    facebook::jni::alias_ref<JReactNativeFeatureFlagsCxxInterop> /*unused*/) {
+  return ReactNativeFeatureFlags::keepTimersRunningWhileHostPausedAndroid();
 }
 
 bool JReactNativeFeatureFlagsCxxInterop::optimizedAnimatedPropUpdates(
@@ -1232,9 +1232,6 @@ void JReactNativeFeatureFlagsCxxInterop::registerNatives() {
         "enableFollowUpMountItemDispatchAndroid",
         JReactNativeFeatureFlagsCxxInterop::enableFollowUpMountItemDispatchAndroid),
       makeNativeMethod(
-        "enableFontScaleChangesUpdatingLayout",
-        JReactNativeFeatureFlagsCxxInterop::enableFontScaleChangesUpdatingLayout),
-      makeNativeMethod(
         "enableIOSCompressedTextFrameAdjustment",
         JReactNativeFeatureFlagsCxxInterop::enableIOSCompressedTextFrameAdjustment),
       makeNativeMethod(
@@ -1348,6 +1345,9 @@ void JReactNativeFeatureFlagsCxxInterop::registerNatives() {
       makeNativeMethod(
         "fuseboxWebSocketEventsEnabled",
         JReactNativeFeatureFlagsCxxInterop::fuseboxWebSocketEventsEnabled),
+      makeNativeMethod(
+        "keepTimersRunningWhileHostPausedAndroid",
+        JReactNativeFeatureFlagsCxxInterop::keepTimersRunningWhileHostPausedAndroid),
       makeNativeMethod(
         "optimizedAnimatedPropUpdates",
         JReactNativeFeatureFlagsCxxInterop::optimizedAnimatedPropUpdates),

@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<73327eab3ccc39c8d823c9d2b110d23c>>
+ * @generated SignedSource<<674f975884ae746e067e614523f2bfc3>>
  * @flow strict
  * @noformat
  */
@@ -79,7 +79,6 @@ export type ReactNativeFeatureFlags = Readonly<{
   enableFabricLogs: Getter<boolean>,
   enableFlexboxAutoMinSizeInStrictMode: Getter<boolean>,
   enableFollowUpMountItemDispatchAndroid: Getter<boolean>,
-  enableFontScaleChangesUpdatingLayout: Getter<boolean>,
   enableIOSCompressedTextFrameAdjustment: Getter<boolean>,
   enableIOSTextBaselineOffsetPerLine: Getter<boolean>,
   enableIOSViewClipToPaddingBox: Getter<boolean>,
@@ -118,6 +117,7 @@ export type ReactNativeFeatureFlags = Readonly<{
   fuseboxFrameRecordingEnabled: Getter<boolean>,
   fuseboxScreenshotCaptureEnabled: Getter<boolean>,
   fuseboxWebSocketEventsEnabled: Getter<boolean>,
+  keepTimersRunningWhileHostPausedAndroid: Getter<boolean>,
   optimizedAnimatedPropUpdates: Getter<boolean>,
   overrideBySynchronousMountPropsAtMountingAndroid: Getter<boolean>,
   perfIssuesEnabled: Getter<boolean>,
@@ -343,10 +343,6 @@ export const enableFlexboxAutoMinSizeInStrictMode: Getter<boolean> = createNativ
  */
 export const enableFollowUpMountItemDispatchAndroid: Getter<boolean> = createNativeFlagGetter('enableFollowUpMountItemDispatchAndroid', false);
 /**
- * Enables font scale changes updating layout for measurable nodes.
- */
-export const enableFontScaleChangesUpdatingLayout: Getter<boolean> = createNativeFlagGetter('enableFontScaleChangesUpdatingLayout', true);
-/**
  * Adjusts iOS Text drawing frames for compressed explicit line heights.
  */
 export const enableIOSCompressedTextFrameAdjustment: Getter<boolean> = createNativeFlagGetter('enableIOSCompressedTextFrameAdjustment', false);
@@ -498,6 +494,10 @@ export const fuseboxScreenshotCaptureEnabled: Getter<boolean> = createNativeFlag
  * Enable reporting of WebSocket network events (`Network.webSocket*` CDP events) to the React Native DevTools CDP backend.
  */
 export const fuseboxWebSocketEventsEnabled: Getter<boolean> = createNativeFlagGetter('fuseboxWebSocketEventsEnabled', false);
+/**
+ * Keep JS timers running on Android while the React host is paused, stopping them only when the React instance is destroyed. Matches iOS, where timers do not depend on host lifecycle.
+ */
+export const keepTimersRunningWhileHostPausedAndroid: Getter<boolean> = createNativeFlagGetter('keepTimersRunningWhileHostPausedAndroid', false);
 /**
  * When enabled, uses optimized platform-specific paths to apply animated props synchronously. On Android, this uses a batched int/double buffer protocol with a single JNI call. Other platforms apply the props of each view through the existing synchronous update.
  */

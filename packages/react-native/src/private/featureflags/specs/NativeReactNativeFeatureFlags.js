@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<043ccaebbb88ea3c413809d9d628d584>>
+ * @generated SignedSource<<2eb3f4a3dca013c51ad2913944855010>>
  * @flow strict
  * @noformat
  */
@@ -55,7 +55,6 @@ export interface Spec extends TurboModule {
   readonly enableFabricLogs?: () => boolean;
   readonly enableFlexboxAutoMinSizeInStrictMode?: () => boolean;
   readonly enableFollowUpMountItemDispatchAndroid?: () => boolean;
-  readonly enableFontScaleChangesUpdatingLayout?: () => boolean;
   readonly enableIOSCompressedTextFrameAdjustment?: () => boolean;
   readonly enableIOSTextBaselineOffsetPerLine?: () => boolean;
   readonly enableIOSViewClipToPaddingBox?: () => boolean;
@@ -94,6 +93,7 @@ export interface Spec extends TurboModule {
   readonly fuseboxFrameRecordingEnabled?: () => boolean;
   readonly fuseboxScreenshotCaptureEnabled?: () => boolean;
   readonly fuseboxWebSocketEventsEnabled?: () => boolean;
+  readonly keepTimersRunningWhileHostPausedAndroid?: () => boolean;
   readonly optimizedAnimatedPropUpdates?: () => boolean;
   readonly overrideBySynchronousMountPropsAtMountingAndroid?: () => boolean;
   readonly perfIssuesEnabled?: () => boolean;

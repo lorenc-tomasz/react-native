@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<861063ef7d217992d3cecd410e25d885>>
+ * @generated SignedSource<<c305274be2fc6720b6c0eb75e78bd6b0>>
  */
 
 /**
@@ -54,7 +54,6 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
   private var enableFabricLogsCache: Boolean? = null
   private var enableFlexboxAutoMinSizeInStrictModeCache: Boolean? = null
   private var enableFollowUpMountItemDispatchAndroidCache: Boolean? = null
-  private var enableFontScaleChangesUpdatingLayoutCache: Boolean? = null
   private var enableIOSCompressedTextFrameAdjustmentCache: Boolean? = null
   private var enableIOSTextBaselineOffsetPerLineCache: Boolean? = null
   private var enableIOSViewClipToPaddingBoxCache: Boolean? = null
@@ -93,6 +92,7 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
   private var fuseboxFrameRecordingEnabledCache: Boolean? = null
   private var fuseboxScreenshotCaptureEnabledCache: Boolean? = null
   private var fuseboxWebSocketEventsEnabledCache: Boolean? = null
+  private var keepTimersRunningWhileHostPausedAndroidCache: Boolean? = null
   private var optimizedAnimatedPropUpdatesCache: Boolean? = null
   private var overrideBySynchronousMountPropsAtMountingAndroidCache: Boolean? = null
   private var perfIssuesEnabledCache: Boolean? = null
@@ -418,16 +418,6 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
       cached = currentProvider.enableFollowUpMountItemDispatchAndroid()
       accessedFeatureFlags.add("enableFollowUpMountItemDispatchAndroid")
       enableFollowUpMountItemDispatchAndroidCache = cached
-    }
-    return cached
-  }
-
-  override fun enableFontScaleChangesUpdatingLayout(): Boolean {
-    var cached = enableFontScaleChangesUpdatingLayoutCache
-    if (cached == null) {
-      cached = currentProvider.enableFontScaleChangesUpdatingLayout()
-      accessedFeatureFlags.add("enableFontScaleChangesUpdatingLayout")
-      enableFontScaleChangesUpdatingLayoutCache = cached
     }
     return cached
   }
@@ -808,6 +798,16 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
       cached = currentProvider.fuseboxWebSocketEventsEnabled()
       accessedFeatureFlags.add("fuseboxWebSocketEventsEnabled")
       fuseboxWebSocketEventsEnabledCache = cached
+    }
+    return cached
+  }
+
+  override fun keepTimersRunningWhileHostPausedAndroid(): Boolean {
+    var cached = keepTimersRunningWhileHostPausedAndroidCache
+    if (cached == null) {
+      cached = currentProvider.keepTimersRunningWhileHostPausedAndroid()
+      accessedFeatureFlags.add("keepTimersRunningWhileHostPausedAndroid")
+      keepTimersRunningWhileHostPausedAndroidCache = cached
     }
     return cached
   }
